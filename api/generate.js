@@ -4,6 +4,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize environment variables
 dotenv.config();
+// Log environment variables for debugging
+console.log('GEMINI_API_KEY:', process.env.GEMINI_API_KEY);
 
 // Initialize Express app
 const app = express();
@@ -55,6 +57,7 @@ app.post('/api/generate', async (req, res) => {
 
     } catch (error) {
         console.error('Generation error:', error);
+        console.error('Error details:', error.response ? error.response.data : error.message);
         res.status(500).json({
             success: false,
             error: 'Failed to generate content',
